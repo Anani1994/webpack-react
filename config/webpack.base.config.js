@@ -20,6 +20,13 @@ module.exports = {
           minimize: true
         }
       }]
+    },
+    {
+      test: /\.m?js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader'
+      }
     }]
   },
   // 插件管理
