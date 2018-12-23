@@ -28,6 +28,8 @@ module.exports = {
       }, {
         loader: 'css-loader' // translates CSS into CommonJS
       }, {
+        loader: 'postcss-loader', // Automatically add browser prefix
+      }, {
         loader: 'less-loader' // compiles Less to CSS
       }]
     },
