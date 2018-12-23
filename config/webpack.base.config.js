@@ -37,6 +37,21 @@ module.exports = {
       use: {
         loader: 'babel-loader'
       }
+    }, {
+      test: /\.(jpg|png|gif|svg|jpeg|woff|woff2|eot|ttf|otf|ico)$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 1024,  // 指定上面所说的指定大小的标准，超过之后将会交给 file-loader 处理
+          /*
+           * 配置 file-loader 的可选项
+           * [name]表示图片文件的文件名 
+           * [ext]表示图片文件的扩展名 
+           * [hash]表示图片文件的哈希值
+           */
+          name: 'images/[name].[ext]'
+        }
+      }]
     }]
   },
   // 插件管理
