@@ -1,12 +1,16 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-import logo from './static/images/logo.png';
+import Home from './Home';
+import Product from './Product';
 
 const App = () => (
-  <div>
-    <p>Hello world</p>
-    <img src={logo} alt="logo" />
-  </div>
+  <BrowserRouter>
+    <div>
+      <Route path="/" exact component={Home} />
+      <Route path="/product" exact component={Product} />
+    </div>
+  </BrowserRouter>
 );
 
 export default App;
