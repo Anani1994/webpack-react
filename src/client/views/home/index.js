@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import store from './store';
+import store from '../../store';
 
 class Home extends React.Component {
   constructor(props) {
