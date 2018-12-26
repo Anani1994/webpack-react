@@ -8,7 +8,7 @@ const App = () => (
   <BrowserRouter>
     <div>
       <Route path="/" exact component={Home} />
-      <Route path="/product" exact component={Product} />
+      <Route path="/product" exact render={() => (<Product typeCheck="test type check" />)} />
     </div>
   </BrowserRouter>
 );

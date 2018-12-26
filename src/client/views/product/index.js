@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import getData from '../../api/data';
 
 class Product extends React.Component {
@@ -20,8 +21,13 @@ class Product extends React.Component {
 
   render() {
     const { status } = this.state;
-    return <div>{status}</div>;
+    const { typeCheck } = this.props;
+    return <div>{status} &gt; {typeCheck}</div>;
   }
 }
+
+Product.propTypes = {
+  typeCheck: PropTypes.string.isRequired,
+};
 
 export default Product;
