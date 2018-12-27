@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import store from '../../store';
 
 class Home extends React.Component {
@@ -14,6 +15,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+        <FormattedMessage id="helloWorld" />
         <div>{this.text}</div>
         <Link to="/product">go</Link>
       </div>
