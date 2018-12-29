@@ -3,6 +3,9 @@ const path = require('path');
 const webpackBaseConfig = require('./webpack.base.config');
 // 合并配置的插件
 const webpackMerge = require('webpack-merge');
+// 加载本地数据
+const testData = require('../src/server/manage/controller/test.json');
+
 
 module.exports = webpackMerge(webpackBaseConfig, {
   // 指定模式
@@ -47,6 +50,11 @@ module.exports = webpackMerge(webpackBaseConfig, {
      * 
      * compress: true
      */
+    before: function (app, server) {
+      app.get('/local/data', function (req, res) {
+        res.json(testData);
+      });
+    },
     disableHostCheck: true
   }
 });

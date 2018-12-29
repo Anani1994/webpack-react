@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import getData from '../../api/data';
+import { getData, getLocalData } from '../../api/data';
 
 class Product extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      localData: '',
       status: 'pending',
     };
   }
@@ -17,12 +18,18 @@ class Product extends React.Component {
         status: res.statusText,
       });
     });
+    getLocalData().then((res) => {
+      const { name } = res.data.data[0];
+      this.setState({
+        localData: name,
+      });
+    });
   }
 
   render() {
-    const { status } = this.state;
+    const { status, localData } = this.state;
     const { typeCheck } = this.props;
-    return <div>{status} &gt; {typeCheck}</div>;
+    return <div>{localData} &gt; {status} &gt; {typeCheck}</div>;
   }
 }
 
