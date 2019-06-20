@@ -3,7 +3,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // 入口配置
   entry: {
-    main: path.join(__dirname, '../src/index.js'),
+    main: path.join(__dirname, '../src/client/index.js'),
   },
   // 输出配置
   output: {

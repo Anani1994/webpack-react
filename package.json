@@ -1,8 +1,8 @@
 {
-  "name": "webpack-react",
+  "name": "react-todolist",
   "version": "1.0.0",
   "author": "Anani",
-  "description": "webpack-react basic development environment",
+  "description": "Implementing TodoList with React, React-redux, etc",
   "main": "index.js",
   "keywords": [
     "webpack",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Anani1994/webpack-react"
+    "url": "https://github.com/Anani1994/react-todolist"
   },
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.config.js",
@@ -61,8 +61,18 @@
     "webpack-dev-server": "^3.1.11",
     "webpack-merge": "^4.1.5"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "src/**/*.js": "eslint"
+    "linters": {
+      "src/**/*.{js,jsx}": "eslint .",
+      "ignore": [
+        "dist/**/*"
+      ]
+    }
   },
   "license": "MIT"
 }
