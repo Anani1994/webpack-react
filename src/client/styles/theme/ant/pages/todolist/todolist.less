@@ -1,0 +1,36 @@
+.todolist {
+    .todo-header {
+        background: @top-bar-bg;
+        .todo-title {
+            color: @top-bar-font;
+        }
+    }
+    .todo-footer {
+        background: @primary-bg;
+        .todo-content {
+            .todo-item {
+                background: @item-bg;
+                border-color: @item-border;
+                input[type=text] {
+                    background: @transparent;
+                    &:focus {
+                        border-color: @item-info-border;
+                    }
+                }
+                .close {
+                    &::after {
+                        color: @item-close;
+                        border-color: @item-close;
+                    }
+                }
+                &.done {
+                    border-color: @item-done-border;
+                    background: @item-done-bg;
+                    input[type=text] {
+                        border-color: @item-info-done-border;
+                    }
+                }
+            }
+        }
+    }
+}
