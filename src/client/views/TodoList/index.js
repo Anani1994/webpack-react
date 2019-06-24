@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
+import React, { Component } from 'react';
+import TodoListUI from './components/TodoListUI';
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
+    this.id = 3;
     this.state = {
       value: '',
+      // eslint-disable-next-line
       list: [
         { id: 1, done: false, info: 'learn python' },
         { id: 2, done: true, info: 'learn javascript' },
@@ -31,7 +34,12 @@ class TodoList extends Component {
     e.preventDefault();
     const { value } = this.state;
     this.setState((provState) => {
-      const list = [...provState.list, value];
+      const item = {
+        id: (this.id += 1),
+        done: false,
+        info: value,
+      };
+      const list = [...provState.list, item];
       return { value: '', list };
     });
   }
@@ -63,93 +71,23 @@ class TodoList extends Component {
 
   render() {
     const {
-      state,
+      state: { value, list },
       handleInputChange,
       handleSubmit,
       toggleTaskStatus,
       editTaskInfo,
       handleDeleteClick,
     } = this;
-    const { value, list } = state;
-
     return (
-      <div className="todolist">
-        <form className="todo-header" onSubmit={handleSubmit}>
-          <label htmlFor="todo">
-            <span className="todo-title">ToDoList</span>
-            <input
-              id="todo"
-              name="todo"
-              type="text"
-              placeholder="Please enter to-do items"
-              value={value}
-              onChange={handleInputChange}
-            />
-          </label>
-        </form>
-        <div className="todo-footer">
-          <div className="todo-content">
-            <h2>正在进行</h2>
-            <ul>
-              {list.map((item, index) => {
-                if (!item.done) {
-                  return (
-                    <li
-                      className="todo-item"
-                      key={item.id}
-                    >
-                      <input
-                        type="checkbox"
-                        onClick={() => toggleTaskStatus(index)}
-                      />
-                      <input
-                        type="text"
-                        value={item.info}
-                        onChange={e => editTaskInfo(e, index)}
-                      />
-                      <span
-                        className="close"
-                        onClick={() => handleDeleteClick(index)}
-                      />
-                    </li>
-                  );
-                }
-                return false;
-              })}
-            </ul>
-            <h2>已经完成</h2>
-            <ul>
-              {list.map((item, index) => {
-                if (item.done) {
-                  return (
-                    <li
-                      className="todo-item done"
-                      key={item.id}
-                    >
-                      <input
-                        type="checkbox"
-                        checked
-                        readOnly
-                        onClick={() => toggleTaskStatus(index)}
-                      />
-                      <input
-                        type="text"
-                        value={item.info}
-                        onChange={e => editTaskInfo(e, index)}
-                      />
-                      <span
-                        className="close"
-                        onClick={() => handleDeleteClick(index)}
-                      />
-                    </li>
-                  );
-                }
-                return false;
-              })}
-            </ul>
-          </div>
-        </div>
-      </div>
+      <TodoListUI
+        value={value}
+        list={list}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
+        toggleTaskStatus={toggleTaskStatus}
+        editTaskInfo={editTaskInfo}
+        handleDeleteClick={handleDeleteClick}
+      />
     );
   }
 }
