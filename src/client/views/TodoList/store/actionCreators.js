@@ -1,10 +1,16 @@
 import {
+  INIT_TODO,
   CHANGE_INPUT_VALUE,
   ADD_TODO_ITEM,
   DELETE_TODO_ITEM,
   TOGGLE_TASK_STATUS,
   EDIT_TASK_INFO,
 } from './actionTypes';
+
+export const getInitTodo = data => ({
+  type: INIT_TODO,
+  data,
+});
 
 export const getInputChange = value => ({
   type: CHANGE_INPUT_VALUE,

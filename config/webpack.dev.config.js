@@ -3,6 +3,8 @@ const path = require('path');
 const webpackBaseConfig = require('./webpack.base.config');
 // 合并配置的插件
 const webpackMerge = require('webpack-merge');
+// 相应本地数据请求
+const { createServer } = require('../src/server');
 
 module.exports = webpackMerge(webpackBaseConfig, {
   // 指定模式
@@ -47,7 +49,7 @@ module.exports = webpackMerge(webpackBaseConfig, {
      * 
      * compress: true
      */
-    before: app => {},
+    before: app => createServer(app),
     disableHostCheck: true
   }
 });

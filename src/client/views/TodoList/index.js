@@ -1,16 +1,13 @@
-import orderBy from 'lodash/orderBy';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TodoListUI from './components/TodoListUI';
 import { actionCreators } from './store';
+import getTodoList from '../../api/todolist';
 
 class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    // 获取当前最大的 id 值作为下一项的基础
-    const { list } = this.props;
-    const ret = orderBy(list, 'id', 'desc')[0];
-    this.id = ret.id || 0;
+  componentDidMount() {
+    const { initTodoList } = this.props;
+    initTodoList();
   }
 
   render() {
@@ -37,12 +34,26 @@ class TodoList extends Component {
   }
 }
 
+TodoList.defaultProps = {
+  value: '',
+  list: [],
+};
+
 const mapStateToProps = state => ({
   value: state.value,
   list: state.list,
 });
 
 const mapDispatchToProps = dispatch => ({
+  /**
+   * @description
+   * 获取后台 todo 项初始化数据
+   * @returns {void}
+   */
+  initTodoList() {
+    getTodoList('todolist/todo', { id: 1 }).then(data => dispatch(actionCreators.getInitTodo(data.data)));
+  },
+
   /**
    * @description
    * 添加 todo 项
@@ -52,9 +63,8 @@ const mapDispatchToProps = dispatch => ({
   handleSubmit(e, that) {
     e.preventDefault();
     const { value } = that.props;
-    const temp = that;
     const item = {
-      id: (temp.id += 1),
+      id: new Date().getTime() + Math.random(),
       done: false,
       info: value,
     };
