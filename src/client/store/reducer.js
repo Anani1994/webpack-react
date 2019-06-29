@@ -1,7 +1,7 @@
-import { combinReducers } from 'redux';
+import { combineReducers } from 'redux';
 import { reducer as todoReducer } from '../views/TodoList/store';
 
-const reducers = combinReducers({
+const reducers = combineReducers({
   todo: todoReducer,
 });
 
