@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 
 class TodoListUI extends Component {
@@ -79,5 +80,21 @@ class TodoListUI extends Component {
     );
   }
 }
+
+TodoListUI.propTypes = {
+  value: PropTypes.string.isRequired,
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      done: PropTypes.bool,
+      info: PropTypes.string,
+    }),
+  ).isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  toggleTaskStatus: PropTypes.func.isRequired,
+  editTaskInfo: PropTypes.func.isRequired,
+  handleDeleteClick: PropTypes.func.isRequired,
+};
 
 export default TodoListUI;

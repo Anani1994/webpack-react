@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TodoItem = (props) => {
   const {
@@ -25,6 +26,14 @@ const TodoItem = (props) => {
       <span className="close" onClick={() => handleDeleteClick(index)} />
     </li>
   );
+};
+
+TodoItem.propTypes = {
+  index: PropTypes.number.isRequired,
+  item: PropTypes.object.isRequired,
+  toggleTaskStatus: PropTypes.func.isRequired,
+  editTaskInfo: PropTypes.func.isRequired,
+  handleDeleteClick: PropTypes.func.isRequired,
 };
 
 export default TodoItem;
