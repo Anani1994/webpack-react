@@ -29,6 +29,7 @@ class TodoListUI extends Component {
               name="todo"
               type="text"
               placeholder="Please enter to-do items"
+              required
               value={value}
               onChange={handleInputChange}
             />

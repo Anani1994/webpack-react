@@ -1,3 +1,4 @@
+import getTodoList from '../../../api/todolist';
 import {
   INIT_TODO,
   CHANGE_INPUT_VALUE,
@@ -7,10 +8,7 @@ import {
   EDIT_TASK_INFO,
 } from './actionTypes';
 
-export const getInitTodo = data => ({
-  type: INIT_TODO,
-  data,
-});
+export const getInitTodo = () => dispatch => getTodoList('todolist/todo').then(res => dispatch({ type: INIT_TODO, data: res.data }));
 
 export const getInputChange = value => ({
   type: CHANGE_INPUT_VALUE,

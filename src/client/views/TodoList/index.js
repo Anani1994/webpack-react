@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TodoListUI from './components/TodoListUI';
 import { actionCreators } from './store';
-import getTodoList from '../../api/todolist';
 
 class TodoList extends Component {
   componentDidMount() {
@@ -51,7 +50,7 @@ const mapDispatchToProps = dispatch => ({
    * @returns {void}
    */
   initTodoList() {
-    getTodoList('todolist/todo', { id: 1 }).then(data => dispatch(actionCreators.getInitTodo(data.data)));
+    dispatch(actionCreators.getInitTodo());
   },
 
   /**
