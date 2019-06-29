@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 import { reducer as todoReducer } from '../views/TodoList/store';
 
 const reducers = combineReducers({

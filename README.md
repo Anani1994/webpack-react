@@ -1,13 +1,18 @@
 ## ToDoList
 
-利用 React 相关技术实现 ToDoList 项目。
+利用 `React` 相关技术实现 `ToDoList` 项目。
 
 #### 使用到的技术栈：
 
  - [react](https://reactjs.org/)
  - [react-dom](https://reactjs.org)
+ - [axios](https://github.com/axios/axios)
+ - [prop-types](https://github.com/facebook/prop-types)
  - [redux](https://redux.js.org/)
  - [react-redux](https://react-redux.js.org)
+ - [redux-thunk](https://github.com/reduxjs/redux-thunk)
+ - [immutable](https://immutable-js.github.io/immutable-js/)
+ - [redux-immutable](https://github.com/gajus/redux-immutable)
 
 ### `yarn run dev`
 

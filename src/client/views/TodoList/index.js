@@ -39,8 +39,8 @@ TodoList.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  value: state.todo.value,
-  list: state.todo.list,
+  value: state.getIn(['todo', 'value']),
+  list: state.getIn(['todo', 'list']),
 });
 
 const mapDispatchToProps = dispatch => ({

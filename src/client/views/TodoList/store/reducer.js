@@ -1,3 +1,4 @@
+import { Map } from 'immutable';
 import {
   INIT_TODO,
   CHANGE_INPUT_VALUE,
@@ -8,32 +9,29 @@ import {
 } from './actionTypes';
 
 // 默认数据
-const defaultState = {
+const defaultState = Map({
   value: '',
-};
+});
 
 const reducer = (state = defaultState, action) => {
-  const newState = JSON.parse(JSON.stringify(state));
+  const stateBak = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case INIT_TODO:
-      newState.list = action.data;
-      return newState;
+      return state.set('list', action.data);
     case CHANGE_INPUT_VALUE:
-      newState.value = action.value;
-      return newState;
+      return state.set('value', action.value);
     case ADD_TODO_ITEM:
-      newState.list.push(action.item);
-      newState.value = '';
-      return newState;
+      stateBak.list.push(action.item);
+      return state.merge({
+        list: stateBak.list,
+        value: '',
+      });
     case DELETE_TODO_ITEM:
-      newState.list.splice(action.index, 1);
-      return newState;
+      return state.deleteIn(['list', action.index]);
     case TOGGLE_TASK_STATUS:
-      newState.list[action.index].done = !newState.list[action.index].done;
-      return newState;
+      return state.updateIn(['list', action.index, 'done'], done => !done);
     case EDIT_TASK_INFO:
-      newState.list[action.index].info = action.value;
-      return newState;
+      return state.setIn(['list', action.index, 'info'], action.value);
     default:
       return state;
   }

@@ -32,6 +32,7 @@ class TodoListUI extends Component {
               placeholder="Please enter to-do items"
               required
               value={value}
+              autoComplete="off"
               onChange={handleInputChange}
             />
           </label>
