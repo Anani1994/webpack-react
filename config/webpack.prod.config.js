@@ -4,20 +4,23 @@ const webpackBaseConfig = require('./webpack.base.config');
 // 合并配置的插件
 const webpackMerge = require('webpack-merge');
 // 用于分离 CSS
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// 删除冗余 CSS
-const glob = require('glob');
-const PurifyCssWebpack = require('purifycss-webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
 
 module.exports = webpackMerge(webpackBaseConfig, {
   // 指定模式
   mode: 'production',
+  optimization: {
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+  },
   // 加载器
   module: {
-    rules: [{
-      test: /\.less$/,
+    rules: [
+      {
+        test: /\.less$/,
       use: [{
-        loader: MiniCssExtractPlugin.loader // creates style nodes from JS strings
+        loader: MiniCssExtractPlugin.loader // extracts CSS into separate files
       }, {
         loader: 'css-loader' // translates CSS into CommonJS
       }, {
@@ -29,14 +32,10 @@ module.exports = webpackMerge(webpackBaseConfig, {
   },
   // 插件配置
   plugins: [
-    new PurifyCssWebpack({
-      paths: glob.sync(path.join(__dirname, '../*.html'))
-    }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: "css/[name].css",
-      // chunkFilename: "[id].css"
-    })
-  ]
+      filename: 'css/[name].css',
+    }),
+  ],
 });
