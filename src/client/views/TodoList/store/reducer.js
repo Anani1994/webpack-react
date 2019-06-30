@@ -11,6 +11,7 @@ import {
 // 默认数据
 const defaultState = Map({
   value: '',
+  list: [],
 });
 
 const reducer = (state = defaultState, action) => {

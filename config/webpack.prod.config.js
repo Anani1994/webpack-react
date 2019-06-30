@@ -7,6 +7,10 @@ const webpackMerge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
+// 打包前移除之前的文件
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// 复制静态文件
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = webpackMerge(webpackBaseConfig, {
   // 指定模式
@@ -37,5 +41,9 @@ module.exports = webpackMerge(webpackBaseConfig, {
       // both options are optional
       filename: 'css/[name].css',
     }),
+    new CleanWebpackPlugin(),
+    new CopyPlugin([
+      { from: 'src/server/api', to: 'api' },
+    ]),
   ],
 });
