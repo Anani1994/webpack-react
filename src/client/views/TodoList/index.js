@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TodoListUI from './components/TodoListUI';
 import { actionCreators } from './store';
+import { actionCreators as getChangeLang } from '../../i18n/store';
 
 class TodoList extends Component {
   componentDidMount() {
@@ -13,11 +14,13 @@ class TodoList extends Component {
     const {
       value,
       list,
+      lang,
       handleSubmit,
       handleInputChange,
       toggleTaskStatus,
       editTaskInfo,
       handleDeleteClick,
+      changeLanguage,
     } = this.props;
     return (
       <TodoListUI
@@ -28,6 +31,7 @@ class TodoList extends Component {
         toggleTaskStatus={toggleTaskStatus}
         editTaskInfo={editTaskInfo}
         handleDeleteClick={handleDeleteClick}
+        changeLanguage={() => changeLanguage(lang)}
       />
     );
   }
@@ -41,6 +45,7 @@ TodoList.defaultProps = {
 const mapStateToProps = state => ({
   value: state.getIn(['todo', 'value']),
   list: state.getIn(['todo', 'list']),
+  lang: state.getIn(['i18n', 'lang']),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -110,6 +115,16 @@ const mapDispatchToProps = dispatch => ({
   editTaskInfo(e, index) {
     const { value } = e.target;
     dispatch(actionCreators.getEditTaskInfo(value, index));
+  },
+
+  /**
+   * @description
+   * 改变语言
+   * @param {string} 当前语言
+   * @returns {void}
+   */
+  changeLanguage(lang = 'zh-CN') {
+    dispatch(getChangeLang(lang === 'zh-CN' ? 'en-US' : 'zh-CN'));
   },
 });
 

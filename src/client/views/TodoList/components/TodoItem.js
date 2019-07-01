@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import { FormattedMessage } from 'react-intl';
 
 const TodoItem = (props) => {
   const {
@@ -23,6 +24,15 @@ const TodoItem = (props) => {
         value={item.info}
         onChange={e => editTaskInfo(e, index)}
       />
+      {/* <FormattedMessage id={item.info}>
+        {txt => (
+          <input
+            type="text"
+            value={txt}
+            onChange={e => editTaskInfo(e, index)}
+          />
+        )}
+      </FormattedMessage> */}
       <span className="close" onClick={() => handleDeleteClick(index)} />
     </li>
   );

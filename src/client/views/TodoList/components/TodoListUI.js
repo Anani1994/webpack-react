@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import TodoItem from './TodoItem';
 
 class TodoListUI extends Component {
@@ -19,12 +20,13 @@ class TodoListUI extends Component {
       toggleTaskStatus,
       editTaskInfo,
       handleDeleteClick,
+      changeLanguage,
     } = this.props;
     return (
       <div className="todolist">
         <form className="todo-header" onSubmit={handleSubmit}>
           <label htmlFor="todo">
-            <span className="todo-title">ToDoList</span>
+            <span className="todo-title" onClick={changeLanguage}>ToDoList</span>
             <input
               id="todo"
               name="todo"
@@ -39,7 +41,7 @@ class TodoListUI extends Component {
         </form>
         <div className="todo-footer">
           <div className="todo-content">
-            <h2>正在进行</h2>
+            <FormattedMessage id="doing" tagName="h2" />
             <ul>
               {list.map((item, index) => {
                 if (!item.done) {
@@ -57,7 +59,7 @@ class TodoListUI extends Component {
                 return null;
               })}
             </ul>
-            <h2>已经完成</h2>
+            <FormattedMessage id="done" tagName="h2" />
             <ul>
               {list.map((item, index) => {
                 if (item.done) {
@@ -96,6 +98,7 @@ TodoListUI.propTypes = {
   toggleTaskStatus: PropTypes.func.isRequired,
   editTaskInfo: PropTypes.func.isRequired,
   handleDeleteClick: PropTypes.func.isRequired,
+  changeLanguage: PropTypes.func.isRequired,
 };
 
 export default TodoListUI;
