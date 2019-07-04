@@ -13,6 +13,8 @@
  - [redux-thunk](https://github.com/reduxjs/redux-thunk)
  - [immutable](https://immutable-js.github.io/immutable-js/)
  - [redux-immutable](https://github.com/gajus/redux-immutable)
+ - [react-intl](https://github.com/formatjs/react-intl)
+ - [react-transition-group](https://reactcommunity.org/react-transition-group/)
 
 ### `yarn run dev`
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import TodoItem from './TodoItem';
 
 class TodoListUI extends Component {
@@ -26,7 +27,9 @@ class TodoListUI extends Component {
       <div className="todolist">
         <form className="todo-header" onSubmit={handleSubmit}>
           <label htmlFor="todo">
-            <span className="todo-title" onClick={changeLanguage}>ToDoList</span>
+            <span className="todo-title" onClick={changeLanguage}>
+              ToDoList
+            </span>
             <input
               id="todo"
               name="todo"
@@ -43,39 +46,55 @@ class TodoListUI extends Component {
           <div className="todo-content">
             <FormattedMessage id="doing" tagName="h2" />
             <ul>
-              {list.map((item, index) => {
-                if (!item.done) {
-                  return (
-                    <TodoItem
-                      key={item.id}
-                      index={index}
-                      item={item}
-                      toggleTaskStatus={toggleTaskStatus}
-                      editTaskInfo={editTaskInfo}
-                      handleDeleteClick={handleDeleteClick}
-                    />
-                  );
-                }
-                return null;
-              })}
+              <TransitionGroup>
+                {list.map((item, index) => {
+                  if (!item.done) {
+                    return (
+                      <CSSTransition
+                        key={item.id}
+                        timeout={1000}
+                        classNames="fade"
+                        unmountOnExit
+                      >
+                        <TodoItem
+                          index={index}
+                          item={item}
+                          toggleTaskStatus={toggleTaskStatus}
+                          editTaskInfo={editTaskInfo}
+                          handleDeleteClick={handleDeleteClick}
+                        />
+                      </CSSTransition>
+                    );
+                  }
+                  return null;
+                })}
+              </TransitionGroup>
             </ul>
             <FormattedMessage id="done" tagName="h2" />
             <ul>
-              {list.map((item, index) => {
-                if (item.done) {
-                  return (
-                    <TodoItem
-                      key={item.id}
-                      index={index}
-                      item={item}
-                      toggleTaskStatus={toggleTaskStatus}
-                      editTaskInfo={editTaskInfo}
-                      handleDeleteClick={handleDeleteClick}
-                    />
-                  );
-                }
-                return null;
-              })}
+              <TransitionGroup>
+                {list.map((item, index) => {
+                  if (item.done) {
+                    return (
+                      <CSSTransition
+                        key={item.id}
+                        timeout={1000}
+                        classNames="fade"
+                        unmountOnExit
+                      >
+                        <TodoItem
+                          index={index}
+                          item={item}
+                          toggleTaskStatus={toggleTaskStatus}
+                          editTaskInfo={editTaskInfo}
+                          handleDeleteClick={handleDeleteClick}
+                        />
+                      </CSSTransition>
+                    );
+                  }
+                  return null;
+                })}
+              </TransitionGroup>
             </ul>
           </div>
         </div>
