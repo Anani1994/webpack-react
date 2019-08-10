@@ -1,17 +1,17 @@
 {
   "name": "react-todolist",
   "version": "1.0.0",
-  "author": "Anani",
+  "author": "DongWanHong",
   "description": "Implementing TodoList with React, React-redux, etc",
   "main": "index.js",
   "keywords": [
     "webpack",
     "react"
   ],
-  "homepage": "https://github.com/Anani1994/react-todolist",
+  "homepage": "https://github.com/dongwanhong/react-todolist",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Anani1994/react-todolist"
+    "url": "https://github.com/dongwanhong/react-todolist"
   },
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.config.js",
